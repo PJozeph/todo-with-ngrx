@@ -1,0 +1,54 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "imagePath": "https://api.dicebear.com/7.x/pixel-art/svg?seed=John"
+    },
+    {
+      "id": 2,
+      "name": "Bill Gates",
+      "imagePath": "https://api.dicebear.com/7.x/pixel-art/svg?seed=Bill"
+    },
+    {
+      "id": 3,
+      "name": "Elon Musk",
+      "imagePath": "https://api.dicebear.com/7.x/pixel-art/svg?seed=ElonMusk"
+    },
+    {
+      "id": 4,
+      "name": "Mark Zuckerberg",
+      "imagePath": "https://api.dicebear.com/7.x/pixel-art/svg?seed=MarkZuckerberg"
+    },
+    {
+      "id": 5,
+      "name": "Steve Jobs",
+      "imagePath": "https://api.dicebear.com/7.x/pixel-art/svg?seed=SteveJobs"
+    },
+    {
+      "id": 6,
+      "name": "Jeff Bezos",
+      "imagePath": "https://api.dicebear.com/7.x/pixel-art/svg?seed=JeffBezos"
+    }
+  ],
+  "todos": [
+    {
+      "userId": 1,
+      "id": 1,
+      "title": "delectus aut autem",
+      "completed": false
+    },
+    {
+      "userId": 1,
+      "id": 2,
+      "title": "Learn Angular",
+      "completed": false
+    },
+    {
+      "userId": 1,
+      "id": 3,
+      "title": "Learn RxJs",
+      "completed": false
+    }
+  ]
+}

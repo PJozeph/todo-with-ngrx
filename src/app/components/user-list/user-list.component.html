@@ -1,0 +1,6 @@
+<section *ngIf="users$ | async as userList" class="user-list">
+  <div *ngFor="let user of userList" class="user-card" (click)="onUserSelected(user.id)">
+    <img [src]="user.imagePath">
+    {{ user.name }}
+  </div>
+</section>

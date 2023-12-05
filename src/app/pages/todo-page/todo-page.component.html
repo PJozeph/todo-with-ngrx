@@ -1,0 +1,10 @@
+<header *ngIf="user$ | async as user">
+  <div class="user-card">
+    <img [src]="user.imagePath" />
+    {{ user.name }}
+  </div>
+</header>
+<section class="todo-page">
+  <app-pending-todo-list />
+  <app-completed-todo-list />
+</section>

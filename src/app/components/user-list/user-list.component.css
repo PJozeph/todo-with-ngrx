@@ -1,0 +1,32 @@
+/* .user-card {
+  display: flex;
+  align-items: center;
+  border: 1px solid gray;
+
+  padding: 3px;
+  border-radius: 7px;
+  margin: 7px;
+  width: 15rem;
+} */
+
+.todo-page {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-card:hover {
+  background-color: #f5f5f5;
+  cursor: pointer;
+}
+
+img {
+  height: 2rem;
+}
+
+.user-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
