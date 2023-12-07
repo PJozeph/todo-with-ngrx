@@ -5,7 +5,6 @@ import { Store } from '@ngrx/store';
 import { Observable, combineLatest, map, tap } from 'rxjs';
 import { Todo } from 'src/app/modals/todo-modal';
 import { User } from 'src/app/modals/user.modal';
-import { TodoActionService } from 'src/app/services/todo-action.service';
 import { TodoService } from 'src/app/services/todo.service';
 import { featchCompletedTodo, undoToDoStatus } from 'src/app/store/actions';
 import {
@@ -21,7 +20,6 @@ import {
 export class CompletedTodoListComponent {
   todoService: TodoService = inject(TodoService);
   activatedRoute: ActivatedRoute = inject(ActivatedRoute);
-  todoAction: TodoActionService = inject(TodoActionService);
   store: Store = inject(Store);
   destoryRef: DestroyRef = inject(DestroyRef);
 

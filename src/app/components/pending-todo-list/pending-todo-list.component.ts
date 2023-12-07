@@ -1,6 +1,5 @@
 import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import {
   Observable,
@@ -10,7 +9,6 @@ import {
 } from 'rxjs';
 import { Todo } from 'src/app/modals/todo-modal';
 import { User } from 'src/app/modals/user.modal';
-import { TodoActionService } from 'src/app/services/todo-action.service';
 import { TodoService } from 'src/app/services/todo.service';
 import { fetchPendingTodoList, setTodoStatusCompleted } from 'src/app/store/actions';
 import {
@@ -25,8 +23,6 @@ import {
 })
 export class PendingTodoListComponent implements OnInit {
   todoService: TodoService = inject(TodoService);
-  activatedRoute: ActivatedRoute = inject(ActivatedRoute);
-  todoAction: TodoActionService = inject(TodoActionService);
   store: Store = inject(Store);
   destoryRef: DestroyRef = inject(DestroyRef);
 
