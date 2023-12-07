@@ -19,6 +19,5 @@ export const userResolver: ResolveFn<User> = (
   userService
     .getUserById(Number(route.paramMap.get('id')))
     .pipe(
-      tap((user) => console.log(user)),
       tap((user) => store.dispatch(setSelectedUser({ selectedUser: user })))
     );
