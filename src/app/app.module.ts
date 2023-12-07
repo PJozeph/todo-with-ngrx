@@ -13,6 +13,13 @@ import { RouterModule } from '@angular/router';
 import { PendingTodoListComponent } from './components/pending-todo-list/pending-todo-list.component';
 import { TodoPageComponent } from './pages/todo-page/todo-page.component';
 
+import { StoreModule } from '@ngrx/store';
+import { todoReducer } from './store/reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { TodoEffects } from './store/effects';
+
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +36,11 @@ import { TodoPageComponent } from './pages/todo-page/todo-page.component';
     HttpClientModule,
     MatCardModule,
     RouterModule,
+    StoreModule.forRoot({ todo: todoReducer }),
+    EffectsModule.forRoot([TodoEffects]),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],

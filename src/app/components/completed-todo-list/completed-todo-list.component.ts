@@ -1,38 +1,52 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, DestroyRef, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
-import { TodoService } from 'src/app/services/todo.service';
-import { Observable, mergeMap, of, take, tap } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { Observable, combineLatest, map, tap } from 'rxjs';
 import { Todo } from 'src/app/modals/todo-modal';
+import { User } from 'src/app/modals/user.modal';
 import { TodoActionService } from 'src/app/services/todo-action.service';
+import { TodoService } from 'src/app/services/todo.service';
+import { featchCompletedTodo, undoToDoStatus } from 'src/app/store/actions';
+import {
+  selectCompletedTodoList,
+  selectSelectedUser,
+} from 'src/app/store/selectors';
 
 @Component({
   selector: 'app-completed-todo-list',
   templateUrl: './completed-todo-list.component.html',
   styleUrls: ['./completed-todo-list.component.css'],
 })
-export class CompletedTodoListComponent implements OnInit {
+export class CompletedTodoListComponent {
   todoService: TodoService = inject(TodoService);
   activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   todoAction: TodoActionService = inject(TodoActionService);
+  store: Store = inject(Store);
+  destoryRef: DestroyRef = inject(DestroyRef);
 
-  completedodos$: Observable<Todo[]> = this.getTodoList();
+  completedodos$: Observable<Todo[]> = this.store.select(
+    selectCompletedTodoList
+  );
+  user$: Observable<User> = this.store.select(selectSelectedUser);
+
+  data$ = combineLatest([this.completedodos$, this.user$]).pipe(
+    map(([todos, user]) => ({ todos, user }))
+  );
 
   ngOnInit(): void {
-    this.todoAction.todoAction$.pipe().subscribe(() => {
-      this.completedodos$ = this.getTodoList();
-    });
+    this.user$
+      .pipe(
+        takeUntilDestroyed(this.destoryRef),
+        tap((user) => {
+          this.store.dispatch(featchCompletedTodo({ userId: user.id }));
+        })
+      )
+      .subscribe();
   }
 
-  undoCompletedStatus(todoId: number) {
-    this.completedodos$ = this.todoService.updateTodoStatus(todoId, false).pipe(
-      mergeMap(() => this.getTodoList()),
-      tap(() => this.todoAction.todoAction$.next())
-    );
-  }
-
-  private getTodoList(): Observable<Todo[]> {
-    return this.activatedRoute.params.pipe(
-      mergeMap((params) => this.todoService.getCompletedTodoList(params['id']))
-    );
+  undoCompletedStatus(todo: Todo, user: User) {
+    const updatedTodo: Todo = { ...todo, completed: false };
+    this.store.dispatch(undoToDoStatus({ todo: updatedTodo }));
   }
 }

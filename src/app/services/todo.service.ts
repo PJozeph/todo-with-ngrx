@@ -26,13 +26,12 @@ export class TodoService {
   }
 
   public updateTodoStatus(
-    todoId: number,
-    completed: boolean
+    todo: Todo,
   ): Observable<Todo> {
     return this.httpCLicnet.patch<Todo>(
-      `http://localhost:3000/todos/${todoId}`,
+      `http://localhost:3000/todos/${todo.id}`,
       {
-        completed : completed,
+        completed : todo.completed,
       }
     );
   }
