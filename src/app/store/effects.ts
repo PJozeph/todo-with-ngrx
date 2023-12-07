@@ -10,7 +10,7 @@ import {
   setCompletedTodoList,
   setPendingTodoList,
   setTodoStatusCompleted,
-  undoToDoStatus,
+  setTodoStatusPending,
 } from './actions';
 import { selectSelectedUser } from './selectors';
 
@@ -44,7 +44,7 @@ export class TodoEffects {
 
   undoTodoStatusAction$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(undoToDoStatus),
+      ofType(setTodoStatusPending),
       switchMap((action) => this.todoService.updateTodoStatus(action.todo)),
       map(() => featchAllTodo())
     )

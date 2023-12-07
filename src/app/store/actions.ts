@@ -33,7 +33,7 @@ export const setTodoStatusCompleted = createAction(
   props<{ todo: Todo }>()
 );
 
-export const undoToDoStatus = createAction(
+export const setTodoStatusPending = createAction(
   '[Todo] undo Todo Status',
   props<{ todo: Todo }>()
 );

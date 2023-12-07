@@ -6,7 +6,7 @@ import { Observable, combineLatest, map, tap } from 'rxjs';
 import { Todo } from 'src/app/modals/todo-modal';
 import { User } from 'src/app/modals/user.modal';
 import { TodoService } from 'src/app/services/todo.service';
-import { featchCompletedTodo, undoToDoStatus } from 'src/app/store/actions';
+import { featchCompletedTodo, setTodoStatusPending } from 'src/app/store/actions';
 import {
   selectCompletedTodoList,
   selectSelectedUser,
@@ -45,6 +45,6 @@ export class CompletedTodoListComponent {
 
   undoCompletedStatus(todo: Todo, user: User) {
     const updatedTodo: Todo = { ...todo, completed: false };
-    this.store.dispatch(undoToDoStatus({ todo: updatedTodo }));
+    this.store.dispatch(setTodoStatusPending({ todo: updatedTodo }));
   }
 }
