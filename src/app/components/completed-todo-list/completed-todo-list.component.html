@@ -1,7 +1,7 @@
 <section class="todo-list">
   <h1>Completed Todos</h1>
   <div *ngIf="completedodos$ | async as todos">
-    <div *ngFor="let todo of data.todos" class="todo-item">
+    <div *ngFor="let todo of todos" class="todo-item">
       {{ todo.title }}
       <button (click)="undoCompletedStatus(todo)">Undo</button>
     </div>

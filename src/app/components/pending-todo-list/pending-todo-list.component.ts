@@ -26,7 +26,7 @@ export class PendingTodoListComponent implements OnInit {
   store: Store = inject(Store);
   destoryRef: DestroyRef = inject(DestroyRef);
 
-  private pendingTodos$: Observable<Todo[]> =
+  public pendingTodos$: Observable<Todo[]> =
     this.store.select(selectPendigTodoList);
   private user$: Observable<User> = this.store.select(selectSelectedUser);
 
