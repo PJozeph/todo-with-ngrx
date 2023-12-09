@@ -1,7 +1,7 @@
 <section class="todo-list">
   <h1>Pending Todos</h1>
-  <div *ngIf="data$ | async as data">
-    <div *ngFor="let todo of data.todos" class="todo-item">
+  <div *ngIf="pendingTodos$ | async as todos">
+    <div *ngFor="let todo of todos" class="todo-item">
       {{ todo.title }}
       <input type="checkbox" (click)="markAsCompleted(todo)" />
     </div>

@@ -30,10 +30,6 @@ export class PendingTodoListComponent implements OnInit {
     this.store.select(selectPendigTodoList);
   private user$: Observable<User> = this.store.select(selectSelectedUser);
 
-  data$ = combineLatest([this.pendingTodos$, this.user$]).pipe(
-    map(([todos, user]) => ({ todos, user }))
-  );
-
   ngOnInit(): void {
     this.user$
       .pipe(

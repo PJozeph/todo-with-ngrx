@@ -28,9 +28,6 @@ export class CompletedTodoListComponent {
   );
   user$: Observable<User> = this.store.select(selectSelectedUser);
 
-  data$ = combineLatest([this.completedodos$, this.user$]).pipe(
-    map(([todos, user]) => ({ todos, user }))
-  );
 
   ngOnInit(): void {
     this.user$
@@ -43,7 +40,7 @@ export class CompletedTodoListComponent {
       .subscribe();
   }
 
-  undoCompletedStatus(todo: Todo, user: User) {
+  undoCompletedStatus(todo: Todo) {
     const updatedTodo: Todo = { ...todo, completed: false };
     this.store.dispatch(setTodoStatusPending({ todo: updatedTodo }));
   }
